@@ -10,16 +10,14 @@
 
 
 - **Bringing up Single node Kubernetes Cluster on aws**
-- 
-    - N.Virginia: ami-2ab2b550 or Oregon: ami-9957ece1, Minimum t2.medium, allow all TCP Inbound rules
-    $ ssh -i "xxx.pem" ubuntu@<Public-IP>
-    $ sudo su
-    # ./init_master.sh
-    # kubectl taint nodes --all node-role.kubernetes.io/master-
+	- N.Virginia: ami-2ab2b550 or Oregon: ami-9957ece1, Minimum t2.medium, allow all TCP Inbound rules
+	- ssh -i "xxx.pem" ubuntu@<Public-IP>
+	- sudo su
+	- ./init_master.sh
+	- kubectl taint nodes --all node-role.kubernetes.io/master-
 - **Setting up Helm on Kubernetes**
-- 
-    - curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh
-    - chmod 700 get_helm.sh
+	- curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh
+	- chmod 700 get_helm.sh
     - ./get_helm.sh
     - kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin --user=admin --user=kubelet --group=system:serviceaccounts  
 

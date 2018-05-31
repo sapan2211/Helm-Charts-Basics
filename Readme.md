@@ -16,13 +16,55 @@
 	- ./init_master.sh
 	- kubectl taint nodes --all node-role.kubernetes.io/master-
 - **Setting up Helm on Kubernetes**
+- 
 	- curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh
 	- chmod 700 get_helm.sh
     - ./get_helm.sh
     - kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin --user=admin --user=kubelet --group=system:serviceaccounts  
 
+- **Helm Structure**
+-
+	https://docs.helm.sh/
+	https://docs.bitnami.com/kubernetes/how-to/create-your-first-helm-chart/
+
 ## **Application without Helm chart - WordPress Example** ##
-- MySql Database
-- Apache  
+- Creating Application
+	- Database
+		- kubectl create secret generic mysql-pass –from-literal=password=YOUR_PASSWORD
+		- kubectl create -f mysql-pv.yaml
+		- kubectl create -f mysql-pvc.yaml
+		- kubectl create -f mysql-svc.yaml
+		- kubectl create -f mysql-deployment.yaml
+	- Apache
+		- kubectl create -f wp-pv.yaml
+		- kubectl create -f wp-pvc.yaml
+		- kubectl create -f wp-svc.yaml
+		- kubectl create -f wp-deployment.yaml
+
+- Deleting Application
+	- kubectl delete deploy/wordpress
+	- kubectl delete deploy/wordpress-mysql
+	- kubectl delete svc/wordpress
+	- kubectl delete svc/wordpress-mysql
+	- kubectl delete secret mysql-pass
 
 ## **Application with Helm Chart - Wordpress Example** ##
+- Creating Application
+	- Helm install wordpress --name=wp
+- Deleting the Application
+	- Helm delete wp --purge
+
+## **Helm Concepts** ##
+Helm is a tool that streamlines installing and managing Kubernetes applications.
+Think of it like apt/yum/homebrew for Kubernetes.
+
+- Helm has two parts: a client (`helm`) and a server (`tiller`)
+- Tiller runs inside of your Kubernetes cluster, and manages releases (installations)
+  of your charts.
+- Helm runs on your laptop, CI/CD, or wherever you want it to run.
+- Charts are Helm packages that contain at least two things:
+  - A description of the package (`Chart.yaml`)
+  - One or more templates, which contain Kubernetes manifest files
+- Charts can be stored on disk, or fetched from remote chart repositories
+  (like Debian or RedHat packages)
+

@@ -72,6 +72,6 @@ Think of it like apt/yum/homebrew for Kubernetes.
 Commands:
 
 -  helm create <chart-name>
--  helm install <chart-folder-name> --name=<any-name>
+-  helm install {chart-folder-name} --name={any-relevant-name}
 -  helm list
--  helm delete <chart-name-installed> --purge
+-  helm delete {chart-name-installed} --purge

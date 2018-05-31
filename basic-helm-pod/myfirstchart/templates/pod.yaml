@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ template "myfirstchart.fullname" . }}i
+  namespace: {{ .Values.namespace }}
+spec:
+  containers:
+  - name: nginx
+    image: {{ .Values.image.nginx }}
+    ports:
+    - containerPort: 80

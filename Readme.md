@@ -23,9 +23,8 @@
     - kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin --user=admin --user=kubelet --group=system:serviceaccounts  
 
 - **Helm Structure**
--
-	https://docs.helm.sh/
-	https://docs.bitnami.com/kubernetes/how-to/create-your-first-helm-chart/
+	- https://docs.helm.sh/
+	- https://docs.bitnami.com/kubernetes/how-to/create-your-first-helm-chart/
 
 ## **Application without Helm chart - WordPress Example** ##
 - Creating Application
@@ -68,3 +67,11 @@ Think of it like apt/yum/homebrew for Kubernetes.
 - Charts can be stored on disk, or fetched from remote chart repositories
   (like Debian or RedHat packages)
 
+## **Creating First Helm chart** ##
+
+Commands:
+
+-  helm create <chart-name>
+-  helm install <chart-folder-name> --name=<any-name>
+-  helm list
+-  helm delete <chart-name-installed> --purge
